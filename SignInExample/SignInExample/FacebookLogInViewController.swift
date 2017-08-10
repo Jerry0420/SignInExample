@@ -32,7 +32,7 @@ class FacebookLogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func fetchProfile(){
-        print("fetch profile")
+        print("attempt to fetch profile......")
         
         let parameters = ["fields": "email, first_name, last_name, picture.type(large)"]
         
@@ -41,11 +41,14 @@ class FacebookLogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             
             if error != nil {
+                print("登入失敗")
                 print("longinerror =\(error)")
                 return
             } else {
                 
                 if let resultNew = result as? [String:Any]{
+                    
+                    print("成功登入")
                     
                     let email = resultNew["email"]  as! String
                     print(email)
@@ -69,8 +72,6 @@ class FacebookLogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
-        print("成功登入")
         
         fetchProfile()
         
